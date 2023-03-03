@@ -1,5 +1,8 @@
 # This code is modified and developed by Goktug Islamoglu from
 # PyCX 0.3 Realtime Visualization Template
+
+
+# PyCX 0.3 Realtime Visualization Template
 ##
 # Written by:
 # Chun Wong
@@ -16,11 +19,6 @@
 # Chun Wong
 # email@chunwong.net
 ##
-# The following two lines should be placed at the beginning of your simulator code:
-##
-# import matplotlib
-# matplotlib.use('TkAgg')
-
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -32,15 +30,17 @@ L = 100  # size of space: LxL
 
 #probability of initial alive cells 
 
-#p = 0.853553390593
-#p = float(0.5 + (1 / (2 * sqrt(2)))) # ferrimagnetic first-order breaking point
+#p = 0.853553390593 #
+#p = float(0.5 + (1 / (2 * sqrt(2)))) # ferrimagnetic first-order phase transition point, conjugate to antiferromagnetic point
 
 #p = 0.146446609407
-#p = float(0.5 - (1 / (2 * sqrt(2)))) # antiferromagnetic first-order breaking point
+#p = float(0.5 - (1 / (2 * sqrt(2)))) # antiferromagnetic first-order phase transition point, conjugate to ferrimagnetic point
 
-p = np.log(1+sqrt(2))/2 + tan(pi/8) #ferromagnetic second-order breaking point
+p = -0.5 + np.log(1+sqrt(2))/2 + tan(pi/8) #ferromagnetic-paramagnetic second-order phase transition point: maximum, reverse wind-blown problem
 
-print p
+# p = 0.5 + np.log(1+sqrt(2))/2 - tan(pi/8)*tan(pi/8) #ferrimagnetic-ferromagnetic second-order phase transition point
+
+print(p)
 
 # initializing randomly assigned states with probability p
 
@@ -187,30 +187,30 @@ def step():
             i += 1
             j += g
     count = len(array)
-    # print count
+    # print(count)
     count0 = len(array0)
-    # print count0
+    # print(count0)
     count1 = len(array1)
-    #print count1
+    #print(count1)
     o += 1
-    #print o
+    #print(o)
     
     #transformation function
     if o == 1:
-        # print count
+        # print(count)
         slope0.append(float(count0))
         slope1.append(float(count1))
         delta.append(float(j))
     elif o > 1:
         slope0.append(float(count0))
-        # print slope0[o-1]
-        # print slope0[o-2]
+        # print(slope0[o-1])
+        # print(slope0[o-2])
         slope1.append(float(count1))
-        # print slope1[o-1]
-        # print slope1[o-2]
+        # print(slope1[o-1])
+        # print(slope1[o-2])
         delta.append(float(j))
-        # print delta[o-1]
-        # print delta[o-2]
+        # print(delta[o-1])
+        # print(delta[o-2])
         ratio = count0 / float(count1)
         ratio0 = (j / i)
         ratio1 = ratio0 / ratio
@@ -221,7 +221,7 @@ def step():
 
         #draw the cotangent function
         if ratio1 != 1:
-            print (ratio3 / float(ratio1 * ratio1) + (1 / float(ratio1)) - ratio2)
+            print((ratio3 / float(ratio1 * ratio1) + (1 / float(ratio1)) - ratio2))
 
     c, nc = nc, c
 
